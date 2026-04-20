@@ -11,11 +11,11 @@ func main() {
 		fmt.Println("go run . ./input.txt ./output.txt ./airport-lookup.csv")
 		return
 	}
-	
+
 	inputPath := os.Args[1]
 	outputPath := os.Args[2]
 	airportPath := os.Args[3]
-	
+
 	if !fileExists(inputPath) {
 		fmt.Println("Input not found")
 		return
@@ -37,12 +37,15 @@ func main() {
 		fmt.Println("Input not found")
 		return
 	}
-	
+
 	text = replaceAirportCodes(text, iataMap, icaoMap)
-	
+
+	text = normalizeVerticalWhitespace(text)
+	text = trimExtraBlankLines(text)
+
 	err = writeTextFile(outputPath, text)
-	if  err != nil {
+	if err != nil {
 		return
 	}
-		
+
 }
