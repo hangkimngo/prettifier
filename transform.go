@@ -36,7 +36,7 @@ func replaceAirportCodes(text string, iataMap, icaoMap map[string]string) string
 	return text
 }
 
-func normalizeVerticalWhiteSpace(text string) string {
+func normalizeVerticalWhitespace(text string) string {
 	text = strings.ReplaceAll(text, "\v", "\n")
 	text = strings.ReplaceAll(text, "\f", "\n")
 	text = strings.ReplaceAll(text, "\r", "\n")

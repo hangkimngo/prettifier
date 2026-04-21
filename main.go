@@ -5,10 +5,17 @@ import (
 	"os"
 )
 
+const usageText = `itinerary usage:
+go run . ./input.txt ./output.txt ./airport-lookup.csv`
+
 func main() {
+	if len(os.Args) == 2 && os.Args[1] == "-h" {
+		fmt.Println(usageText)
+		return
+	}
+
 	if len(os.Args) != 4 {
-		fmt.Println("itinerary usage:")
-		fmt.Println("go run . ./input.txt ./output.txt ./airport-lookup.csv")
+		fmt.Println(usageText)
 		return
 	}
 
@@ -38,10 +45,10 @@ func main() {
 		return
 	}
 
-	text = replaceAirportCodes(text, iataMap, icaoMap)
-
 	text = normalizeVerticalWhitespace(text)
 	text = trimExtraBlankLines(text)
+	text = replaceAirportCodes(text, iataMap, icaoMap)
+	text = replaceDateTimes(text)
 
 	err = writeTextFile(outputPath, text)
 	if err != nil {
