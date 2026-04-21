@@ -2,7 +2,6 @@ package main
 
 import (
 	"regexp"
-	"strings"
 )
 
 func replaceAirportCodes(text string, iataMap, icaoMap map[string]string) string {
@@ -37,14 +36,16 @@ func replaceAirportCodes(text string, iataMap, icaoMap map[string]string) string
 }
 
 func normalizeVerticalWhitespace(text string) string {
-	text = strings.ReplaceAll(text, "\v", "\n")
-	text = strings.ReplaceAll(text, "\f", "\n")
-	text = strings.ReplaceAll(text, "\r", "\n")
+	re := regexp.MustCompile(`\x{000D}\x{000A}|[\x{000B}\x{000C}]|(\\r|\\v|\\f)`)
+
+	text = re.ReplaceAllString(text, "\n")
 	return text
 }
 
 func trimExtraBlankLines(text string) string {
-	extraBlanklines := regexp.MustCompile(`\n{3}`)
-	text = extraBlanklines.ReplaceAllString(text, `\n\n`)
+	extraBlanklines := regexp.MustCompile(`\n{3,}`)
+	text = extraBlanklines.ReplaceAllString(text, "\n\n")
 	return text
 }
+
+//
