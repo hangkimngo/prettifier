@@ -68,5 +68,3 @@ func trimExtraBlankLines(text string) string {
 	text = extraBlanklines.ReplaceAllString(text, "\n\n")
 	return text
 }
-
-//

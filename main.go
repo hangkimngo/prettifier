@@ -5,8 +5,10 @@ import (
 	"os"
 )
 
-const usageText = `itinerary usage:
-go run . ./input.txt ./output.txt ./airport-lookup.csv`
+const (
+	usageText = `itinerary usage:
+	go run . ./input.txt ./output.txt ./airport-lookup.csv`
+)
 
 func main() {
 	if len(os.Args) == 2 && os.Args[1] == "-h" {
@@ -55,4 +57,6 @@ func main() {
 		return
 	}
 
+	processed := replaceAirportCodes(text, iataMap, icaoMap)
+	fmt.Println(formatOutput(processed)) // preview text + colorize
 }
