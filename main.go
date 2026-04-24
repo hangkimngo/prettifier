@@ -16,7 +16,15 @@ func main() {
 		return
 	}
 
-	if len(os.Args) != 4 {
+	bonusMode := false
+
+	if len(os.Args) == 5 {
+		if os.Args[4] != "on" && os.Args[4] != "off" {
+			fmt.Println(usageText)
+			return
+		}
+		bonusMode = os.Args[4] == "on"
+	} else if len(os.Args) != 4 {
 		fmt.Println(usageText)
 		return
 	}
@@ -47,16 +55,21 @@ func main() {
 		return
 	}
 
-	text = normalizeVerticalWhitespace(text)
-	text = trimExtraBlankLines(text)
-	text = replaceAirportCodes(text, iataMap, icaoMap)
-	text = replaceDateTimes(text)
+	normalized := normalizeVerticalWhitespace(text)
+	normalized = trimExtraBlankLines(normalized)
 
-	err = writeTextFile(outputPath, text)
+	output := replaceAirportCodes(normalized, iataMap, icaoMap, false)
+	output = replaceDateTimes(output, false)
+
+	err = writeTextFile(outputPath, output)
 	if err != nil {
 		return
 	}
 
-	processed := replaceAirportCodes(text, iataMap, icaoMap)
-	fmt.Println(formatOutput(processed)) // preview text + colorize
+	if bonusMode {
+		preview := replaceAirportCodes(normalized, iataMap, icaoMap, true)
+		preview = replaceDateTimes(preview, true)
+
+		fmt.Println(preview)
+	}
 }

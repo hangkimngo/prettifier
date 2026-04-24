@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func formatDateTime(kind string, value string) (string, bool) {
+func formatDateTime(kind string, value string, bonusMode bool) (string, bool) {
 	var t time.Time
 	var err error
 
@@ -20,27 +20,27 @@ func formatDateTime(kind string, value string) (string, bool) {
 		return "", false
 	}
 
-	offset, ok := formatOffset(value)
+	offset, ok := formatOffset(value, bonusMode)
 	if !ok {
 		return "", false
 	}
 
 	switch kind {
 	case "D":
-		return t.Format("02 Jan 2006"), true
+		return color(t.Format("02 Jan 2006"), blue, bonusMode), true
 	case "T12":
-		return t.Format("03:04PM") + " " + offset, true
+		return color(t.Format("03:04PM")+" "+offset, yellow, bonusMode), true
 	case "T24":
-		return t.Format("15:04") + " " + offset, true
+		return color(t.Format("15:04")+" "+offset, yellow, bonusMode), true
 	default:
 		return "", false
 	}
 
 }
 
-func formatOffset(value string) (string, bool) {
+func formatOffset(value string, colorMode bool) (string, bool) {
 	if strings.HasSuffix(value, "Z") {
-		return "(+00:00)", true
+		return color("(+00:00)", purple, colorMode), true
 	}
 
 	if len(value) < 6 {
@@ -53,10 +53,10 @@ func formatOffset(value string) (string, bool) {
 	if !matched {
 		return "", false
 	}
-	return "(" + tz + ")", true
+	return color("("+tz+")", purple, colorMode), true
 }
 
-func replaceDateTimes(text string) string {
+func replaceDateTimes(text string, colorMode bool) string {
 	re := regexp.MustCompile(`(D|T12|T24)\(([^)]+)\)`)
 
 	return re.ReplaceAllStringFunc(text, func(match string) string {
@@ -68,7 +68,7 @@ func replaceDateTimes(text string) string {
 		kind := parts[1]
 		value := parts[2]
 
-		formatted, ok := formatDateTime(kind, value)
+		formatted, ok := formatDateTime(kind, value, colorMode)
 		if !ok {
 			return match
 		}
