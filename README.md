@@ -49,12 +49,12 @@ go run . -h
 **Airport Codes**  
     #LAX → IATA code  
     ##EGLL → ICAO code  
-    *#LAX → city name instead of airport  
+    *#LAX / *##EGLL → city name instead of airport  
 
 **Date/Time Formats**  
     D(2022-05-09T08:07Z) → Date  
     T12(2022-05-09T08:07Z) → 12-hour format  
-    T24(2022-05-09T08:07Z) → 24-hour format  
+    T24(2022-05-09T08:07-02:00) → 24-hour format  
 
 ## Bonus features:
 - Text preview which highlights dates, times, offsets, airport names, cities in terminal
