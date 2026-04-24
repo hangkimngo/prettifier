@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func replaceAirportCodes(text string, iataMap, icaoMap map[string]Airport, colorMode bool) string {
+func replaceAirportCodes(text string, iataMap, icaoMap map[string]Airport, bonusMode bool) string {
 	re := regexp.MustCompile(`\*?##[A-Z]{4}|\*?#[A-Z]{3}`)
 	text = re.ReplaceAllStringFunc(text, func(match string) string {
 		wantCity := false
@@ -31,15 +31,15 @@ func replaceAirportCodes(text string, iataMap, icaoMap map[string]Airport, color
 			return original
 		}
 
-		if wantCity {
+		if wantCity && bonusMode {
 			if a.City != "" {
-				return color(a.City, green, colorMode)
+				return color(a.City, green, bonusMode)
 			}
 			return original
 		}
 
 		if a.Name != "" {
-			return color(a.Name, green, colorMode)
+			return color(a.Name, green, bonusMode)
 		}
 		return original
 	})
@@ -64,7 +64,7 @@ func normalizeVerticalWhitespace(text string) string {
 }
 
 func trimExtraBlankLines(text string) string {
-	extraBlanklines := regexp.MustCompile(`\n{3,}`)
+	extraBlanklines := regexp.MustCompile(`\n[ \t]*\n(?:[ \t]*\n)+`)
 	text = extraBlanklines.ReplaceAllString(text, "\n\n")
 	return text
 }
