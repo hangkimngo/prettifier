@@ -27,11 +27,11 @@ func formatDateTime(kind string, value string, bonusMode bool) (string, bool) {
 
 	switch kind {
 	case "D":
-		return color(t.Format("02 Jan 2006"), blue, bonusMode), true
+		return color(t.Format("02 Jan 2006"), bonusMode, blue), true
 	case "T12":
-		return color(t.Format("03:04PM")+" "+offset, yellow, bonusMode), true
+		return color(t.Format("03:04PM")+" "+offset, bonusMode, yellow), true
 	case "T24":
-		return color(t.Format("15:04")+" "+offset, yellow, bonusMode), true
+		return color(t.Format("15:04")+" "+offset, bonusMode, yellow), true
 	default:
 		return "", false
 	}
@@ -40,7 +40,7 @@ func formatDateTime(kind string, value string, bonusMode bool) (string, bool) {
 
 func formatOffset(value string, colorMode bool) (string, bool) {
 	if strings.HasSuffix(value, "Z") {
-		return color("(+00:00)", purple, colorMode), true
+		return color("(+00:00)", colorMode, purple, italic), true
 	}
 
 	if len(value) < 6 {
@@ -53,7 +53,7 @@ func formatOffset(value string, colorMode bool) (string, bool) {
 	if !matched {
 		return "", false
 	}
-	return color("("+tz+")", purple, colorMode), true
+	return color("("+tz+")", colorMode, purple, italic), true
 }
 
 func replaceDateTimes(text string, colorMode bool) string {

@@ -1,5 +1,7 @@
 package main
 
+import "strings"
+
 const (
 	reset  = "\033[0m"
 	green  = "\033[32m"
@@ -8,11 +10,13 @@ const (
 	yellow = "\033[33m"
 	purple = "\033[35m"
 	gray   = "\033[90m"
+	bold   = "\033[1m"
+	italic = "\033[3m"
 )
 
-func color(s, c string, enable bool) string {
+func color(s string, enable bool, c ...string) string {
 	if !enable {
 		return s
 	}
-	return c + s + reset
+	return strings.Join(c, "") + s + reset
 }

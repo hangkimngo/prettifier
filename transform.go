@@ -33,13 +33,13 @@ func replaceAirportCodes(text string, iataMap, icaoMap map[string]Airport, bonus
 
 		if wantCity && bonusMode {
 			if a.City != "" {
-				return color(a.City, green, bonusMode)
+				return color(a.City, bonusMode, cyan, bold)
 			}
 			return original
 		}
 
 		if a.Name != "" {
-			return color(a.Name, green, bonusMode)
+			return color(a.Name, bonusMode, green, bold)
 		}
 		return original
 	})
