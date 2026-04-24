@@ -25,9 +25,10 @@ git clone https://gitea.kood.tech/kimhangngo/prettifier
 cd prettifier
 ```
 
-2. Ensure Go is installed
+2. Ensure Go is installed  
+```bash    
     go version
-
+```
 ## Usage Guide
 - Basic usage
 ```bash
