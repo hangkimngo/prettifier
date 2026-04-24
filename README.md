@@ -18,27 +18,32 @@ The tool performs the following transformations:
 * Converts all vertical whitespace to \n
 * Removes excessive blank lines
 
-##Examples:
-Input:
----
-Your flight departs from #HAJ, and your destination is ##EDDW.
----
-Results:
----
-Your flight departs from Hannover Airport, and your destination is Bremen Airport.
----
-Input:
----
+## Examples:  
+
+Input:  
+```
+Your flight departs from #HAJ, and your destination is ##EDDW.  
+```
+
+Results:  
+```
+Your flight departs from Hannover Airport, and your destination is Bremen Airport.  
+```
+
+Input:  
+```
 1. D(2022-05-09T08:07Z)
 2. T12(2069-04-24T19:18-02:00)
-3. T24(2032-07-17T04:08+13:00)
----
-Results:
----
+3. T24(2032-07-17T04:08+13:00)  
+```
+
+Results:  
+```
 1. 09 May 2022
 2. 07:18PM (-02:00)
 3. 04:08 (+13:00)
----
+```
+
 ## Setup and Installation
 1. Clone the repository:  
 ```bash
