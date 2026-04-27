@@ -1,6 +1,7 @@
-Go from *#BKK,. to ,##EGLL
+Your flight departs from *#HAJ, and your destination is *##EDDW.  
 
-and your destination is ##VVTS.
+
+and your destination is *##VVTS.
 
 1. D(2022-05-09T08:07Z)
 
@@ -19,4 +20,5 @@ and your destination is ##VVTS.
 
 8. T24(2024-07-23T1315:29-11:00)
 
-9. T13(2042-09-01T21:43Z)
+9. T13(2042-09-01T1:43Z)
+10.T24(2029-09-04T3:09Z)

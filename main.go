@@ -7,7 +7,10 @@ import (
 
 const (
 	usageText = `itinerary usage:
-	go run . ./input.txt ./output.txt ./airport-lookup.csv`
+go run . ./input.txt ./output.txt ./airport-lookup.csv
+
+itinerary usage with extra features:
+go run . ./input.txt ./output.txt ./airport-lookup.csv on`
 )
 
 func main() {

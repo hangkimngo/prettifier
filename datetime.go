@@ -38,9 +38,9 @@ func formatDateTime(kind string, value string, bonusMode bool) (string, bool) {
 
 }
 
-func formatOffset(value string, colorMode bool) (string, bool) {
+func formatOffset(value string, bonusMode bool) (string, bool) {
 	if strings.HasSuffix(value, "Z") {
-		return color("(+00:00)", colorMode, purple, italic), true
+		return color("(+00:00)", bonusMode, purple, italic), true
 	}
 
 	if len(value) < 6 {
@@ -53,11 +53,11 @@ func formatOffset(value string, colorMode bool) (string, bool) {
 	if !matched {
 		return "", false
 	}
-	return color("("+tz+")", colorMode, purple, italic), true
+	return color("("+tz+")", bonusMode, purple, italic), true
 }
 
-func replaceDateTimes(text string, colorMode bool) string {
-	re := regexp.MustCompile(`(D|T12|T24)\(([^)]+)\)`)
+func replaceDateTimes(text string, bonusMode bool) string {
+	re := regexp.MustCompile(`(D|T12|T24)\((\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2}))\)`)
 
 	return re.ReplaceAllStringFunc(text, func(match string) string {
 		parts := re.FindStringSubmatch(match)
@@ -68,7 +68,7 @@ func replaceDateTimes(text string, colorMode bool) string {
 		kind := parts[1]
 		value := parts[2]
 
-		formatted, ok := formatDateTime(kind, value, colorMode)
+		formatted, ok := formatDateTime(kind, value, bonusMode)
 		if !ok {
 			return match
 		}
