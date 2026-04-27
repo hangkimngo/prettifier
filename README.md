@@ -17,7 +17,6 @@ The tool performs the following transformations:
     * UTC (Z) offset: "Z" → displayed as (+00:00)  
 3. Normalizes whitespace:
     * Converts all vertical whitespace (\r, \v, \f) into standard newlines (\n)
-Removes excessive blank lines for cleaner output
     * Removes excessive blank lines (no more than two consecutive new-line characters).  
 
 ### Bonus features:
