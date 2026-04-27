@@ -9,7 +9,7 @@ The tool performs the following transformations:
 1. Replaces airport codes:
     * #IATA → full airport name
     * ##ICAO → full airport name
-    * *#CODE → city name instead of airport name *(bonus feature)*
+    * *#IATA / *##ICAO → city name instead of airport name _(bonus feature)_
 2. Formats date and time expressions:
     * Date: D(2007-04-05T12:30−02:00) → 05 Apr 2007  
     * 12 Hour time: T12(2007-04-05T12:30−02:00) → 12:30PM (-02:00)  
@@ -28,7 +28,7 @@ Example: *#LHR → London
 3. Support dynamic airport lookup column order  
 
 ## Examples:  
-**Airport Replacement**
+**Airport Replacement**  
 Input:  
 ```
 Your flight departs from #HAJ, and your destination is ##EDDW.  
@@ -38,7 +38,7 @@ Results:
 ```
 Your flight departs from Hannover Airport, and your destination is Bremen Airport.  
 ```
-**City Name (Bonus)**
+**City Name (Bonus)**  
 Input:  
 ```
 Your flight departs from *#HAJ, and your destination is *##EDDW.  
@@ -48,7 +48,7 @@ Results:
 ```
 Your flight departs from Hannover, and your destination is Bremen.  
 ```
-**Date & Time Formatting**
+**Date & Time Formatting**  
 Input:  
 ```
 1. D(2022-05-09T08:07Z)
@@ -74,7 +74,7 @@ cd prettifier
 
 2. Ensure Go is installed  
 ```bash    
-    go version
+go version
 ```
 ## Usage Guide
 - **Basic usage**
