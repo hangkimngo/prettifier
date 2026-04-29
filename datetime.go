@@ -10,12 +10,12 @@ func formatDateTime(kind string, value string, bonusMode bool) (string, bool) {
 	var t time.Time
 	var err error
 
-	if strings.HasSuffix(value, "Z") {
-		t, err = time.Parse("2006-01-02T15:04Z", value)
-	} else {
-		t, err = time.Parse("2006-01-02T15:04-07:00", value)
-	}
+	// if strings.HasSuffix(value, "Z") {
+	// 	// 	t, err = time.Parse("2006-01-02T15:04Z", value)
+	// 	// } else {
 
+	// }
+	t, err = time.Parse("2006-01-02T15:04Z07:00", value)
 	if err != nil {
 		return "", false
 	}
@@ -58,7 +58,6 @@ func formatOffset(value string, bonusMode bool) (string, bool) {
 
 func replaceDateTimes(text string, bonusMode bool) string {
 	re := regexp.MustCompile(`(D|T12|T24)\((\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2}))\)`)
-
 	return re.ReplaceAllStringFunc(text, func(match string) string {
 		parts := re.FindStringSubmatch(match)
 		if len(parts) != 3 {
